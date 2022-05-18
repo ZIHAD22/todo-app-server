@@ -13,6 +13,10 @@ const AddTaskSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  email: {
+    type: String,
+    trim: true,
+  },
 })
 
 const AddTask = model('task', AddTaskSchema)
