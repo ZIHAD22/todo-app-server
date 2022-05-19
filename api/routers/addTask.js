@@ -1,10 +1,12 @@
 const { Router } = require('express')
 const AddTask = require('../models/AddTask')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 const addTask = Router()
 
 // middleware
+addTask.use(cors())
 
 const verifyJwt = (req, res, next) => {
   const authHeader = req.headers.authorization
@@ -67,6 +69,10 @@ addTask.post('/addTask', async (req, res) => {
   const addTask = new AddTask(req.body)
   const result = await addTask.save()
   res.json(result)
+})
+
+addTask.get('/', (req, res) => {
+  res.send('all ok')
 })
 
 module.exports = addTask
